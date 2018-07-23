@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.market</groupId>
+	<artifactId>potato-market</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<name>potato-market</name>
+	<description>Project for potato market</description>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.0.2.RELEASE</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
+		<docker.image.prefix>potato</docker.image.prefix>
+	    <docker.machine.cert.path>/dev/docker/machine/machines/default</docker.machine.cert.path>
+	    <docker.host>https://192.168.99.100:2376</docker.host>
+	    <docker.file.dir>${basedir}/src/main/docker</docker.file.dir> 
+	</properties>
+
+	<dependencies>		
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-mongodb</artifactId>
+		</dependency>		
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-hateoas</artifactId>
+        </dependency>
+		
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+        <groupId>io.fabric8</groupId>
+        <artifactId>docker-maven-plugin</artifactId>
+        <version>0.19.0</version>
+        <configuration>
+          <dockerHost>${docker.host}</dockerHost>
+          <certPath>${docker.machine.cert.path}</certPath>
+          <images>
+            <image>
+              <alias>${project.artifactId}</alias>
+              <name>${docker.image.prefix}/${project.artifactId}</name>
+              <build>
+                <dockerFileDir>${docker.file.dir}</dockerFileDir>
+                <assembly>
+                  <inline>
+                  <fileSets>
+                    <fileSet>
+                      <includes>
+                        <include>application.properties</include>
+                        <include>target/*.jar</include>
+                      </includes>
+                    </fileSet>
+                  </fileSets>
+                  </inline>
+                </assembly>
+              </build>
+              <run>
+                <namingStrategy>alias</namingStrategy>
+                <ports> 
+                  <port>8080:8080</port>
+                </ports>
+              </run>
+            </image>
+          </images>
+        </configuration>
+      </plugin>
+      </plugins>
+	</build>
+	
+	
+
+
+</project>
