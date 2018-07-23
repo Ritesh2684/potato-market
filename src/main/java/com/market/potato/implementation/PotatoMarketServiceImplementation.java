@@ -5,6 +5,7 @@ package com.market.potato.implementation;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +18,7 @@ import com.market.potato.data.PotatoBag;
 import com.market.potato.exception.PotatoMarketException;
 import com.market.potato.repository.PotatoMarketRepository;
 import com.market.potato.service.PotatoMarketService;
+import com.market.potato.utils.PotatoMarketHelper;
 
 /**
  * @author ritesh
@@ -30,7 +32,10 @@ public class PotatoMarketServiceImplementation implements PotatoMarketService {
 	@Autowired
 	PotatoMarketRepository potatoMarketRepository;
 	
-	public PotatoBag addPotatoBag(PotatoBag potatoBag) {
+	public PotatoBag addPotatoBag(PotatoBag potatoBag) throws PotatoMarketException {
+		
+		potatoBag.setBagId(new Random().nextLong());
+		PotatoMarketHelper.validatePotatoBag(potatoBag);
 		logger.info(potatoBag.toString());
 		logger.debug(potatoBag.toString());
 		return potatoMarketRepository.save(potatoBag);

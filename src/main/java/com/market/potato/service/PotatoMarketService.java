@@ -15,7 +15,7 @@ import com.market.potato.exception.PotatoMarketException;
 
 public interface PotatoMarketService {
 		
-	public PotatoBag addPotatoBag(PotatoBag potatoBag);
+	public PotatoBag addPotatoBag(PotatoBag potatoBag) throws PotatoMarketException;
 	
 	public PotatoBag getPotatoBagById(Long Id) throws PotatoMarketException;
 	
