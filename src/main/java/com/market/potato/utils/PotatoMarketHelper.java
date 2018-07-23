@@ -27,7 +27,12 @@ public final class PotatoMarketHelper {
 	  
 	final static Logger logger = LoggerFactory.getLogger(PotatoMarketServiceImplementation.class);
 	
-	
+	/**
+	 * This method creates Json object from the file
+	 * @param file
+	 * @return JsonNode
+	 * @throws PotatoMarketException
+	 */
 	public static JsonNode getJsonNodeFromFile(File file) throws PotatoMarketException {
 	    
 		String method = "getJsonNodeFromByteArray";
@@ -49,7 +54,11 @@ public final class PotatoMarketHelper {
 	    return node;
 	  }
 	
-	
+	/**
+	 * This method validates the Potato bag object for specified validations
+	 * @param potatoBag PotatoBag
+	 * @throws PotatoMarketException
+	 */
 	public static void validatePotatoBag(PotatoBag potatoBag) throws PotatoMarketException{
 		String method = "validatePotatoBag";
 	    logger.info("Start of method" + method);    
@@ -59,6 +68,11 @@ public final class PotatoMarketHelper {
 		
 	}
 	
+	/**
+	 * This method validates if the Price is between 1 & 50
+	 * @param price price of the potato bag
+	 * @throws PotatoMarketException
+	 */
 	public static void isValidPrice(double price) throws PotatoMarketException {
 		String method = "isValidPrice";
 	    logger.info("Start of method" + method);
@@ -71,6 +85,11 @@ public final class PotatoMarketHelper {
 		
 	}
 	
+	/**
+	 * This method validates if the number of potatoes in the bag is between 1 and 100
+	 * @param numberOfPotatoes
+	 * @throws PotatoMarketException
+	 */
 	public static void isValidNumberOfPotatoes(int numberOfPotatoes) throws PotatoMarketException {
 		String method = "isValidNumberOfPotatoes";
 	    

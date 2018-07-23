@@ -30,7 +30,7 @@ public class PotatoMarketServiceImplementation implements PotatoMarketService {
 	final Logger logger = LoggerFactory.getLogger(PotatoMarketServiceImplementation.class);
 	
 	@Autowired
-	PotatoMarketRepository potatoMarketRepository;
+	PotatoMarketRepository potatoMarketRepository;	
 	
 	public PotatoBag addPotatoBag(PotatoBag potatoBag) throws PotatoMarketException {
 		
@@ -40,6 +40,7 @@ public class PotatoMarketServiceImplementation implements PotatoMarketService {
 		logger.debug(potatoBag.toString());
 		return potatoMarketRepository.save(potatoBag);
 	}
+	
 	
 	public PotatoBag getPotatoBagById(Long Id) throws PotatoMarketException {
 		Optional<PotatoBag> optionalPotatoBag = potatoMarketRepository.findById(Id);

@@ -35,7 +35,10 @@ Potato Bag JSON Structure example
 }
 
 ## Things to do
-Test cases could be increased
-Comments should be improved
-
+Test cases could be increased.
+Comments should be improved.
+Certain properties could be converted to configurations like min and max size of potatos in the bag, min and max price.
+Logging could be improved.
+Hateoas Links could be added.
+Some strings could be converted to Constants.
 
